@@ -48,7 +48,7 @@ public class AddUsercontroller extends HttpServlet {
 				
 				UserDao userDao =new UserDao();
 				if(userDao.addUser(user)) {
-					request.setAttribute("Succmsg", "Registration Successful");
+					request.setAttribute("Succmsg", "Registration Successfuly");
 				}else {
 					request.setAttribute("failedmsg", "There is some issues");
 				}
