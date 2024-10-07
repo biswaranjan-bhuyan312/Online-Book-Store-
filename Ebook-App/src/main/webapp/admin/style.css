@@ -1,0 +1,8 @@
+.bg-costum{
+	background-color: #0d47a1;
+}
+.navbar .nav-item:hover .nav-link{
+	background-color: white;
+	color:blue;
+	border-radius:15px;
+}
