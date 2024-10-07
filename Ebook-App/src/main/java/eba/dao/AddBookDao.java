@@ -66,7 +66,6 @@ public class AddBookDao {
 			st =con.prepareStatement("select * from book_dtls");
 //			st.setString(1, email);
 //			st.setString(2, password);
-			st.setArray(0, null);
 			
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
