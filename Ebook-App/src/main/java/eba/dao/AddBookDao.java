@@ -87,4 +87,81 @@ public class AddBookDao {
 		return list;
 	}
 
+
+	public BookDtls getBookById(int id) {
+		
+		BookDtls book = null;
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con=AddBookDao.getConnection();
+			st =con.prepareStatement("select * from book_dtls where bookId=?");
+			st.setInt(1, id);
+			
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				book = new BookDtls();
+				book.setBookId(rs.getInt(1));
+				book.setBookname(rs.getString(2));
+				book.setAuthor(rs.getString(3));
+				book.setPrice(rs.getString(4));
+				book.setBookCatagory(rs.getString(5));
+				book.setStatus(rs.getString(6));
+				book.setPhotoName(rs.getString(7));
+				book.setEmail(rs.getString(8));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return book;
+	}
+	
+public boolean updateEditBooks(BookDtls book) {
+		
+		boolean f  = false;
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con=AddBookDao.getConnection();
+			st =con.prepareStatement("update book_dtls set bookname=?,author=?,price=?,status=? where bookId=?");
+			st.setString(1,book.getBookname());
+			st.setString(2, book.getAuthor());
+			st.setString(3, book.getPrice());
+			st.setString(4, book.getStatus());
+			st.setInt(5, book.getBookId());
+			
+			int i= st.executeUpdate();
+			if(i==1)
+			{
+				f=true;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return f;
+	}
+
+public boolean deleteBooks(int id) {
+	
+	boolean f  = false;
+	Connection con = null;
+	PreparedStatement st = null;
+	try {
+		con=AddBookDao.getConnection();
+		st =con.prepareStatement("delete from book_dtls where bookId=?");
+		st.setInt(1, id);
+		int i= st.executeUpdate();
+		if(i==1)
+		{
+			f=true;
+		}
+	} catch (Exception e) {
+		// TODO: handle exception
+		e.printStackTrace();
+	}
+	return f;
+}
+
 }
